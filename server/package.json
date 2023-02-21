@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "GraphQL Server (Apollo)",
+  "main": "server.js",
+  "repository": "https://github.com/floridajoca/People-Cars.git",
+  "author": "floridajoca <florida.joca@gmail.com>",
+  "license": "MIT"
+}
