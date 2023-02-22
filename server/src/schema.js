@@ -1,5 +1,5 @@
 import {gql} from "apollo-server-express";
-import {find} from "lodash";
+import {find, remove} from "lodash";
 
 const peoplesArray = [
     {
@@ -120,7 +120,12 @@ const typeDefs = gql`
     
     type Mutation {
        addPerson(id: String!, firstName: String!, lastName: String!): Person
+       updatePerson(id: String!, firstName: String, lastName: String): Person
+       removePerson(id: String!): Person
+        
        addCar(id: String!, year: String!, make: String!, model: String!, price: String!, personId: String!): Car
+       updateCar(id: String!, year: String, make: String, model: String, price: String, personId: String): Car
+       removeCar(id: String!): Car
     }
     
     `
@@ -132,13 +137,13 @@ const typeDefs = gql`
                 return find(peoplesArray, {id: args.id})
             },
 
-
             cars: () => carsArray,
             car: (root, args) => {
                 return find(carsArray, {id: args.id})
             }
         },
         Mutation: {
+            // Person CRUD operation
             addPerson: (root, args) => {
                 const newPerson = {
                     id: args.id,
@@ -150,6 +155,36 @@ const typeDefs = gql`
                 return newPerson
             },
 
+            updatePerson: (root, args) => {
+                const person = find(peoplesArray, {id: args.id})
+
+                if(!person) throw new Error(`Could not find the person with id ${args.id} not exist`)
+
+                    person.firstName = args.firstName
+                    person.lastName = args.lastName
+
+                return person
+            },
+
+            removePerson: (root, args) => {
+                const removedPerson = find(peoplesArray, {id: args.id})
+                const carsFound = find(carsArray, {personId: args.id})
+
+                if(!removedPerson) throw new Error(`Could not find the person with id ${args.id} not exist`)
+
+                remove(peoplesArray, p => {
+                    return p.id === removedPerson.id
+                })
+
+                remove(carsArray, c => {
+                    return c.personId === removedPerson.id
+                })
+
+                return removedPerson
+            },
+
+
+            // Car CRUD operation
             addCar: (root, args) => {
                 const newCar = {
                     id: args.id,
@@ -163,6 +198,31 @@ const typeDefs = gql`
                 carsArray.push(newCar)
 
                 return newCar
+            },
+            updateCar: (root, args) => {
+                const car = find(carsArray, {id: args.id})
+
+                if(!car) throw new Error(`Could not find the car with id ${args.id} not exist`)
+
+                    car.year = args.year,
+                    car.make = args.make,
+                    car.model = args.model,
+                    car.price = args.price,
+                    car.personId = args.personId
+
+                return car
+            },
+
+            removeCar: (root, args) => {
+                const removedCar = find(carsArray, {id: args.id})
+
+                if(!removedCar) throw new Error(`Could not find the car with id ${args.id} not exist`)
+
+                remove(carsArray, c => {
+                    return c.id === removedCar.id
+                })
+
+                return removedCar
             }
         }
     }
