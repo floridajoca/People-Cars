@@ -1,11 +1,15 @@
+import {useMutation} from "@apollo/client";
 import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Button, Form, Input } from 'antd'
+import {ADD_PERSON, GET_PEOPLE} from "../../queries";
 
 
 const AddContact = () => {
     const [id] = useState(uuidv4())
+    const [addPerson] = useMutation(ADD_PERSON)
+
 
     const [form] = Form.useForm()
     const [, forceUpdate] = useState()
@@ -14,12 +18,34 @@ const AddContact = () => {
         forceUpdate([])
     }, [])
 
+    const onFinish = values => {
+        const { firstName, lastName } = values
+
+        addPerson({
+            variables: {
+                id,
+                firstName,
+                lastName
+            },
+            update: (cache, { data: { addPerson } }) => {
+                const data = cache.readQuery({ query: GET_PEOPLE })
+                cache.writeQuery({
+                    query: GET_PEOPLE,
+                    data: {
+                        ...data,
+                        peoples: [...data.peoples, addPerson]
+                    }
+                })
+            }
+        })
+    }
+
     return (
         <Form
             name='add-person-form'
             form={form}
             layout='inline'
-            // onFinish={onFinish}
+            onFinish={onFinish}
             size='large'
             style={{ marginBottom: '40px' }}
         >
