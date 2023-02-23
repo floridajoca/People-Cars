@@ -1,6 +1,7 @@
 import {EditOutlined} from "@ant-design/icons";
 import { Card } from 'antd'
 import { useState } from 'react'
+import RemovePerson from "../buttons/RemovePerson";
 import UpdatePerson from "../forms/UpdatePerson";
 
 const getStyles = () => ({
@@ -49,6 +50,7 @@ const Person = props => {
                     style={styles.card}
                     actions={[
                         <EditOutlined key='edit' onClick={handleButtonClick} />,
+                        <RemovePerson id={id} />
                     ]}
                 >
                     {firstName} {lastName}
