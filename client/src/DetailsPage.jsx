@@ -1,6 +1,5 @@
 import {useQuery} from "@apollo/client";
 import {Button, Card} from "antd";
-import {useState} from "react";
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import {PERSON_OWNS_CARS} from "./queries";
@@ -41,7 +40,6 @@ const DetailsPage = () => {
                                 {year} {make} {model} -{">"} {priceFormatted}
                             </Card>
                         )
-
                     })}
                 </>
             </Card>

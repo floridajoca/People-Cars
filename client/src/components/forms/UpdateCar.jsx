@@ -56,7 +56,6 @@ const UpdateCar = props => {
         }
     }
 
-
     const dropDownList = () => {
         return data?.peoples?.map((person) => {
             return {
@@ -66,7 +65,6 @@ const UpdateCar = props => {
             }
         })
     }
-
 
     const handleMenuClick = (e) => {
         setPersonId(e.key);
@@ -127,15 +125,6 @@ const UpdateCar = props => {
                     onChange={e => updateStateVariable('price', e.target.value)}
                 />
             </Form.Item>
-            {/*<Form.Item*/}
-            {/*    name='personId'*/}
-            {/*    rules={[{ required: true, message: 'Please input the owner of the car!' }]}*/}
-            {/*>*/}
-            {/*    <Input*/}
-            {/*        placeholder='Owner of the car'*/}
-            {/*        onChange={e => updateStateVariable('personId', e.target.value)}*/}
-            {/*    />*/}
-            {/*</Form.Item>*/}
             <Dropdown menu={menuProps}>
                 <Button>
                     <Space>

@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { Button, Form, Input } from 'antd'
 import {ADD_PERSON, GET_PEOPLE} from "../../queries";
 
-
 const AddContact = () => {
     const [id] = useState(uuidv4())
     const [addPerson] = useMutation(ADD_PERSON)

@@ -31,6 +31,7 @@ const Car = props => {
         style: 'currency',
         currency: 'USD',
     });
+
     const updateStateVariable = (variable, value) => {
         switch (variable) {
             case 'year':
