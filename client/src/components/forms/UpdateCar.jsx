@@ -1,7 +1,8 @@
-import { useMutation } from '@apollo/client'
-import { Button, Form, Input } from 'antd'
+import {DownOutlined, UserOutlined} from "@ant-design/icons";
+import {useMutation, useQuery} from '@apollo/client'
+import {Button, Dropdown, Form, Input, Space} from 'antd'
 import { useEffect, useState } from 'react'
-import {UPDATE_CAR } from '../../queries'
+import {GET_PEOPLE, UPDATE_CAR} from '../../queries'
 
 const UpdateCar = props => {
     const [form] = Form.useForm()
@@ -11,16 +12,17 @@ const UpdateCar = props => {
     const [make, setMake] = useState(props.make)
     const [model, setModel] = useState(props.model);
     const [price, setPrice] = useState(props.price);
-    const [personId, setPersonId] = useState(props.personId);
+    const [personId, setPersonId] = useState("");
 
     const [updateCar] = useMutation(UPDATE_CAR)
+    const { loading, error, data } = useQuery(GET_PEOPLE)
 
     useEffect(() => {
         forceUpdate()
     }, [])
 
     const onFinish = values => {
-        const { year, make, model, price, personId } = values
+        const { year, make, model, price } = values
         updateCar({
             variables: {
                 id,
@@ -49,13 +51,31 @@ const UpdateCar = props => {
             case 'price':
                 setPrice(value)
                 break
-            case 'personId':
-                setPersonId(value)
-                break
             default:
                 break
         }
     }
+
+
+    const dropDownList = () => {
+        return data?.peoples?.map((person) => {
+            return {
+                label: `${person.firstName} ${person.lastName}`,
+                key: `${person.id}`,
+                icon: <UserOutlined />,
+            }
+        })
+    }
+
+
+    const handleMenuClick = (e) => {
+        setPersonId(e.key);
+    }
+
+    const menuProps = {
+        items: dropDownList(),
+        onClick: handleMenuClick,
+    };
 
     return (
         <Form
@@ -69,7 +89,6 @@ const UpdateCar = props => {
                 make: make,
                 model: model,
                 price: price,
-                personId: personId,
             }}
         >
             <Form.Item
@@ -108,15 +127,23 @@ const UpdateCar = props => {
                     onChange={e => updateStateVariable('price', e.target.value)}
                 />
             </Form.Item>
-            <Form.Item
-                name='personId'
-                rules={[{ required: true, message: 'Please input the owner of the car!' }]}
-            >
-                <Input
-                    placeholder='Owner of the car'
-                    onChange={e => updateStateVariable('personId', e.target.value)}
-                />
-            </Form.Item>
+            {/*<Form.Item*/}
+            {/*    name='personId'*/}
+            {/*    rules={[{ required: true, message: 'Please input the owner of the car!' }]}*/}
+            {/*>*/}
+            {/*    <Input*/}
+            {/*        placeholder='Owner of the car'*/}
+            {/*        onChange={e => updateStateVariable('personId', e.target.value)}*/}
+            {/*    />*/}
+            {/*</Form.Item>*/}
+            <Dropdown menu={menuProps}>
+                <Button>
+                    <Space>
+                        {!personId ? "Select a person" : personId}
+                        <DownOutlined />
+                    </Space>
+                </Button>
+            </Dropdown>
             <Form.Item shouldUpdate={true}>
                 {() => (
                     <Button
@@ -126,7 +153,9 @@ const UpdateCar = props => {
                             (!form.isFieldTouched('year')
                                 && !form.isFieldTouched('make')
                                 && !form.isFieldTouched('model')
-                                && !form.isFieldTouched('price')) ||
+                                && !form.isFieldTouched('price'))
+                            && !personId
+                            ||
                             form.getFieldsError().filter(({ errors }) => errors.length).length
                         }
                     >
