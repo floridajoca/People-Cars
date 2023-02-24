@@ -21,7 +21,7 @@ const App = () => {
                 <Layout className="App">
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
-                        <Route path="person/:personId" element={<DetailsPage />} />
+                        <Route path="person/:id" element={<DetailsPage />} />
                     </Routes>
                 </Layout>
             </BrowserRouter>

@@ -39,7 +39,7 @@ const Person = props => {
     }
 
     const onLearnMore = () => {
-        navigate(`/person/${id}`)
+        navigate(`/person/${props.id}`)
     }
 
     return (
