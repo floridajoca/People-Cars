@@ -172,12 +172,11 @@ const typeDefs = gql`
 
                 if(!removedPerson) throw new Error(`Could not find the person with id ${args.id} not exist`)
 
-                remove(peoplesArray, p => {
-                    return p.id === removedPerson.id
-                })
-
                 remove(carsArray, c => {
                     return c.personId === removedPerson.id
+                })
+                remove(peoplesArray, p => {
+                    return p.id === removedPerson.id
                 })
 
                 return removedPerson
