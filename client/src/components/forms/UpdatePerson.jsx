@@ -45,7 +45,7 @@ const UpdatePerson = props => {
     return (
         <Form
             form={form}
-            name='update-contact-form'
+            name='update-person-form'
             layout='inline'
             onFinish={onFinish}
             size='large'
