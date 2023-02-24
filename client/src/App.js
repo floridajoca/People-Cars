@@ -20,6 +20,7 @@ const App = () => {
               <Title/>
                 <AddPerson/>
                 <AddCar/>
+                <h3>Records</h3>
                 <People/>
             </div>
         </ApolloProvider>

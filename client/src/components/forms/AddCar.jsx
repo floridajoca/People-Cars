@@ -67,77 +67,80 @@ const AddCar = () => {
     };
 
     return (
-        <Form
-            name='add-person-form'
-            form={form}
-            layout='inline'
-            onFinish={onFinish}
-            size='large'
-            style={{ marginBottom: '40px' }}
-        >
-            <Form.Item
-                name='year'
-                label={'Year:'}
-                required
-                rules={[{ required: true, message: 'Please input the year of the car!' }]}
-            >
-                <Input
-                    placeholder='Year'
-                />
-            </Form.Item>
-            <Form.Item
-                name='make'
-                label={'Make:'}
-                required
-                rules={[{ required: true, message: 'Please input the make of the car!' }]}
-            >
-                <Input
-                    placeholder='Make'
-                />
-            </Form.Item>
-            <Form.Item
-                name='model'
-                label={'Model:'}
-                required
-                rules={[{ required: true, message: 'Please input the model of the car!' }]}
-            >
-                <Input
-                    placeholder='Model'
-                />
-            </Form.Item>
-            <Form.Item
-                name='price'
-                label={'Price:'}
-                required
-                rules={[{ required: true, message: 'Please input the price of the car!' }]}
-            >
-                <Input
-                    placeholder='Price'
-                />
-            </Form.Item>
-                <Dropdown menu={menuProps}>
-                    <Button>
-                        <Space>
-                            {!personId ? "Select a person" : personId}
-                            <DownOutlined />
-                        </Space>
-                    </Button>
-                </Dropdown>
-            <Form.Item shouldUpdate={true}>
-                {() => (
-                    <Button
-                        type='primary'
-                        htmlType='submit'
-                        disabled={
-                            !form.isFieldsTouched(true) ||
-                            form.getFieldsError().filter(({ errors }) => errors.length).length
-                        }
+        <>
+            <h3> Add Car </h3>
+                <Form
+                    name='add-person-form'
+                    form={form}
+                    layout='inline'
+                    onFinish={onFinish}
+                    size='large'
+                    style={{ marginBottom: '40px' }}
+                >
+                    <Form.Item
+                        name='year'
+                        label={'Year:'}
+                        required
+                        rules={[{ required: true, message: 'Please input the year of the car!' }]}
                     >
-                        Add Car
-                    </Button>
-                )}
-            </Form.Item>
-        </Form>
+                        <Input
+                            placeholder='Year'
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='make'
+                        label={'Make:'}
+                        required
+                        rules={[{ required: true, message: 'Please input the make of the car!' }]}
+                    >
+                        <Input
+                            placeholder='Make'
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='model'
+                        label={'Model:'}
+                        required
+                        rules={[{ required: true, message: 'Please input the model of the car!' }]}
+                    >
+                        <Input
+                            placeholder='Model'
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name='price'
+                        label={'Price:'}
+                        required
+                        rules={[{ required: true, message: 'Please input the price of the car!' }]}
+                    >
+                        <Input
+                            placeholder='Price'
+                        />
+                    </Form.Item>
+                        <Dropdown menu={menuProps}>
+                            <Button>
+                                <Space>
+                                    {!personId ? "Select a person" : personId}
+                                    <DownOutlined />
+                                </Space>
+                            </Button>
+                        </Dropdown>
+                    <Form.Item shouldUpdate={true}>
+                        {() => (
+                            <Button
+                                type='primary'
+                                htmlType='submit'
+                                disabled={
+                                    !form.isFieldsTouched(true) ||
+                                    form.getFieldsError().filter(({ errors }) => errors.length).length
+                                }
+                            >
+                                Add Car
+                            </Button>
+                        )}
+                    </Form.Item>
+                </Form>
+        </>
     )
 }
 
