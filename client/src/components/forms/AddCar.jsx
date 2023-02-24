@@ -58,7 +58,6 @@ const AddContact = () => {
 
 
     const handleMenuClick = (e) => {
-        console.log('click', e.key);
         setPersonId(e.key);
     }
 
