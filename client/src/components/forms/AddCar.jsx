@@ -118,7 +118,7 @@ const AddCar = () => {
                 <Dropdown menu={menuProps}>
                     <Button>
                         <Space>
-                            Select a person
+                            {!personId ? "Select a person" : personId}
                             <DownOutlined />
                         </Space>
                     </Button>
