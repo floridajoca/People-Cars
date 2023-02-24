@@ -5,6 +5,8 @@
   margin: auto;
   padding: 40px;
   width: 90%;
+  border: 2px solid;
+  background-color: white;
 }
 
 .App-logo {
@@ -35,4 +37,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 1px solid #c4c2c2;
+}
+
+.home h3 {
+  text-align: center;
+  width: 100%;
+  border-bottom: 1px solid #c4c2c2;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.home h3 span {
+  background:#fff;
+  padding:0 10px;
+}
+
+.home form {
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.ant-spin-nested-loading.css-dev-only-do-not-override-1km3mtt{
+   width: 100%;
+}
+
+
+.ant-card.ant-card-bordered.css-dev-only-do-not-override-1km3mtt{
+  width: 100%;
+}
+
+.ant-card-body::before {
+   background-color: grey;
 }

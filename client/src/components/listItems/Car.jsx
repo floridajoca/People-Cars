@@ -6,7 +6,8 @@ import UpdateCar from "../forms/UpdateCar";
 
 const getStyles = () => ({
     card: {
-        width: '500px'
+        width: '100%',
+        backgroundColor: "#e5e3e3"
     }
 })
 
@@ -26,6 +27,10 @@ const Car = props => {
         setEditMode(!editMode)
     }
 
+    const priceFormatted = Number(price).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
     const updateStateVariable = (variable, value) => {
         switch (variable) {
             case 'year':
@@ -65,7 +70,7 @@ const Car = props => {
                         <RemoveCar id={id} />
                     ]}
                 >
-                    {year} {make} {model} -> ${price}
+                    {year} {make} {model} -> {priceFormatted}
                 </Card>
             )}
         </div>

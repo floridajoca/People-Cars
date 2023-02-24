@@ -109,6 +109,12 @@ const typeDefs = gql`
         price: String
         personId: String!
     }
+    
+    type PersonAndCars {
+        firstName: String
+        lastName: String
+        cars: [Car]
+  }
   
     type Query {
         peoples: [Person]
@@ -116,6 +122,8 @@ const typeDefs = gql`
         
         car(id: String!): Car
         cars: [Car]
+        
+        personAndCars(id: String!): PersonAndCars
     }
     
     type Mutation {
@@ -140,6 +148,12 @@ const typeDefs = gql`
             cars: () => carsArray,
             car: (root, args) => {
                 return find(carsArray, {id: args.id})
+            },
+
+            personAndCars: (root, args) => {
+                const person =  find(peoplesArray, { id: args.id });
+                const personsCars = carsArray.filter(car => car.personId==args.id)
+                return {...person, cars: personsCars}
             }
         },
         Mutation: {
@@ -172,12 +186,11 @@ const typeDefs = gql`
 
                 if(!removedPerson) throw new Error(`Could not find the person with id ${args.id} not exist`)
 
-                remove(peoplesArray, p => {
-                    return p.id === removedPerson.id
-                })
-
                 remove(carsArray, c => {
                     return c.personId === removedPerson.id
+                })
+                remove(peoplesArray, p => {
+                    return p.id === removedPerson.id
                 })
 
                 return removedPerson

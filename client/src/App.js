@@ -1,12 +1,11 @@
 import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
-import AddCar from "./components/forms/AddCar";
-import AddPerson from "./components/forms/AddPerson";
-import Cars from "./components/list/Cars";
-import People from "./components/list/People";
-import Title from "./components/Title";
+import {Layout} from "antd";
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import 'antd/dist/reset.css'
+import DetailsPage from "./DetailsPage";
+import Home from "./Home";
 
 const client = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
@@ -16,12 +15,16 @@ const client = new ApolloClient({
 const App = () => {
     return (
         <ApolloProvider client={client}>
-            <div className="App">
-              <Title/>
-                <AddPerson/>
-                <AddCar/>
-                <People/>
-            </div>
+
+
+            <BrowserRouter>
+                <Layout className="App">
+                    <Routes>
+                        <Route path="/" element={<Home />}></Route>
+                        <Route path="person/:id" element={<DetailsPage />} />
+                    </Routes>
+                </Layout>
+            </BrowserRouter>
         </ApolloProvider>
   );
 }

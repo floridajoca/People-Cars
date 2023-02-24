@@ -7,7 +7,7 @@ import Car from "../listItems/Car";
 const getStyles = () => ({
     list: {
         display: 'flex',
-        justifyContent: 'center'
+        width: '100%'
     }
 })
 
