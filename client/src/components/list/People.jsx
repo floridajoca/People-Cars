@@ -6,7 +6,8 @@ import Person from "../listItems/Person";
 const getStyles = () => ({
     list: {
         display: 'flex',
-        justifyContent: 'center'
+        width: '100%'
+
     }
 })
 

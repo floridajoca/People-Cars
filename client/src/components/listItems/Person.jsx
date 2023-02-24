@@ -7,7 +7,7 @@ import Cars from "../list/Cars";
 
 const getStyles = () => ({
     card: {
-        width: '500px'
+        width: '100%'
     }
 })
 

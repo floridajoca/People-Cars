@@ -9,7 +9,6 @@ import {ADD_PERSON, GET_PEOPLE} from "../../queries";
 const AddContact = () => {
     const [id] = useState(uuidv4())
     const [addPerson] = useMutation(ADD_PERSON)
-    const styles = getStyles()
 
     const [form] = Form.useForm()
     const [, forceUpdate] = useState()
@@ -42,7 +41,7 @@ const AddContact = () => {
 
     return (
         <>
-            <h3 style={styles.title}> Add Person </h3>
+            <h3> <span>Add Person </span></h3>
                 <Form
                     name='add-person-form'
                     form={form}
@@ -85,13 +84,5 @@ const AddContact = () => {
         </>
     )
 }
-
-const getStyles = () => ({
-    title: {
-        borderWidth: 0.5,
-        borderColor:'black',
-        margin:10,
-    }
-});
 
 export default AddContact
