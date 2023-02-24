@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import {Button, Dropdown, Form, Input, Space} from 'antd'
 import {ADD_CAR, GET_CARS, GET_PEOPLE} from "../../queries";
 
-const AddContact = () => {
+const AddCar = () => {
     const [id] = useState(uuidv4())
     const [personId, setPersonId] = useState("");
     const [addCar] = useMutation(ADD_CAR)
@@ -141,4 +141,4 @@ const AddContact = () => {
     )
 }
 
-export default AddContact
+export default AddCar
