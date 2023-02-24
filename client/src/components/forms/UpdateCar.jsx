@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Button, Form, Input } from 'antd'
 import { useEffect, useState } from 'react'
-import { UPDATE_PERSON } from '../../queries'
+import {UPDATE_CAR } from '../../queries'
 
 const UpdateCar = props => {
     const [form] = Form.useForm()
@@ -13,20 +13,22 @@ const UpdateCar = props => {
     const [price, setPrice] = useState(props.price);
     const [personId, setPersonId] = useState(props.personId);
 
-
-    const [updateCar] = useMutation(UPDATE_PERSON)
+    const [updateCar] = useMutation(UPDATE_CAR)
 
     useEffect(() => {
         forceUpdate()
     }, [])
 
     const onFinish = values => {
-        const { firstName, lastName } = values
+        const { year, make, model, price, personId } = values
         updateCar({
             variables: {
                 id,
-                firstName,
-                lastName
+                year,
+                make,
+                model,
+                price,
+                personId,
             }
         })
         props.onButtonClick()
@@ -47,6 +49,9 @@ const UpdateCar = props => {
             case 'price':
                 setPrice(value)
                 break
+            case 'personId':
+                setPersonId(value)
+                break
             default:
                 break
         }
@@ -64,6 +69,7 @@ const UpdateCar = props => {
                 make: make,
                 model: model,
                 price: price,
+                personId: personId,
             }}
         >
             <Form.Item
@@ -100,6 +106,15 @@ const UpdateCar = props => {
                 <Input
                     placeholder='Price of the car'
                     onChange={e => updateStateVariable('price', e.target.value)}
+                />
+            </Form.Item>
+            <Form.Item
+                name='personId'
+                rules={[{ required: true, message: 'Please input the owner of the car!' }]}
+            >
+                <Input
+                    placeholder='Owner of the car'
+                    onChange={e => updateStateVariable('personId', e.target.value)}
                 />
             </Form.Item>
             <Form.Item shouldUpdate={true}>

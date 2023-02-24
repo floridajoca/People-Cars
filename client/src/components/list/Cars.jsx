@@ -11,7 +11,7 @@ const getStyles = () => ({
     }
 })
 
-const Cars = () => {
+const Cars = ({personId}) => {
     const styles = getStyles()
 
     const { loading, error, data } = useQuery(GET_CARS)
@@ -21,11 +21,14 @@ const Cars = () => {
 
     return (
         <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
-            {data?.cars?.map(({ id, year, model, make, price, personId }) => (
-                <List.Item key={id}>
-                    <Car key={id} id={id} year={year} model={model} make={make} price={price} personId={personId}/>
-                </List.Item>
-            ))}
+
+            {
+                data?.cars?.filter((car) => car.personId === personId).map(({ id, year, model, make, price, personId }) => (
+                    <List.Item key={id}>
+                        <Car key={id} id={id} year={year} model={model} make={make} price={price} personId={personId}/>
+                    </List.Item>
+                ))
+            }
         </List>
     )
 }

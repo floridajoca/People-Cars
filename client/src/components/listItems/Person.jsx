@@ -3,6 +3,7 @@ import { Card } from 'antd'
 import { useState } from 'react'
 import RemovePerson from "../buttons/RemovePerson";
 import UpdatePerson from "../forms/UpdatePerson";
+import Cars from "../list/Cars";
 
 const getStyles = () => ({
     card: {
@@ -54,6 +55,7 @@ const Person = props => {
                     ]}
                 >
                     {firstName} {lastName}
+                    <Cars personId={id}/>
                 </Card>
             )}
         </div>

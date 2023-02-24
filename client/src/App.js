@@ -20,7 +20,6 @@ const App = () => {
               <Title/>
                 <AddPerson/>
                 <AddCar/>
-                <Cars/>
                 <People/>
             </div>
         </ApolloProvider>
