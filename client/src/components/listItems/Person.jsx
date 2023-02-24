@@ -1,6 +1,7 @@
 import {EditOutlined} from "@ant-design/icons";
-import { Card } from 'antd'
+import {Button, Card} from 'antd'
 import { useState } from 'react'
+import {useNavigate} from "react-router";
 import RemovePerson from "../buttons/RemovePerson";
 import UpdatePerson from "../forms/UpdatePerson";
 import Cars from "../list/Cars";
@@ -16,6 +17,7 @@ const Person = props => {
     const [firstName, setFirstName] = useState(props.firstName)
     const [lastName, setLastName] = useState(props.lastName)
     const [editMode, setEditMode] = useState(false)
+    const navigate = useNavigate();
 
     const styles = getStyles()
 
@@ -34,6 +36,10 @@ const Person = props => {
             default:
                 break
         }
+    }
+
+    const onLearnMore = () => {
+        navigate(`/person/${id}`)
     }
 
     return (
@@ -56,6 +62,7 @@ const Person = props => {
                 >
                     {firstName} {lastName}
                     <Cars personId={id}/>
+                    <Button onClick={onLearnMore}>Learn More</Button>
                 </Card>
             )}
         </div>

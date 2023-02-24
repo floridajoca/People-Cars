@@ -1,15 +1,10 @@
 import {ApolloProvider, ApolloClient, InMemoryCache} from "@apollo/client";
 import {Layout} from "antd";
-import {Header} from "antd/es/layout/layout";
-import AddCar from "./components/forms/AddCar";
-import AddPerson from "./components/forms/AddPerson";
-import Cars from "./components/list/Cars";
-import People from "./components/list/People";
-import Title from "./components/Title";
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import 'antd/dist/reset.css'
+import DetailsPage from "./DetailsPage";
 import Home from "./Home";
 
 const client = new ApolloClient({
@@ -24,10 +19,9 @@ const App = () => {
 
             <BrowserRouter>
                 <Layout className="App">
-
                     <Routes>
                         <Route path="/" element={<Home />}></Route>
-                        {/*<Route path="person/:personId" element={<SinglePage />} />*/}
+                        <Route path="person/:personId" element={<DetailsPage />} />
                     </Routes>
                 </Layout>
             </BrowserRouter>
