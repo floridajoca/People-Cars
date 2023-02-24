@@ -1,6 +1,7 @@
 import {useQuery} from "@apollo/client";
 import { List } from 'antd'
 import {GET_CARS} from "../../queries";
+import Car from "../listItems/Car";
 
 
 const getStyles = () => ({
@@ -22,7 +23,7 @@ const Cars = () => {
         <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
             {data?.cars?.map(({ id, year, model, make, price, personId }) => (
                 <List.Item key={id}>
-                    {year}, {model}, {make}, {price}, {personId}
+                    <Car key={id} id={id} year={year} model={model} make={make} price={price} personId={personId}/>
                 </List.Item>
             ))}
         </List>
